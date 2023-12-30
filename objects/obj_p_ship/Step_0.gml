@@ -46,14 +46,16 @@ if (hp<=0) and (x>-5000){
         husk.sprite_index=sprite_index;husk.direction=direction;
         husk.image_angle=image_angle;husk.depth=depth;husk.image_speed=0;
         repeat(choose(4,5,6)){
-            var explo;explo=instance_create(x,y,obj_explosion);
+            var explo;
+			explo=instance_create(x,y,obj_explosion);
             explo.image_xscale=0.5;explo.image_yscale=0.5;
             explo.x+=random_range(sprite_width*0.25,sprite_width*-0.25);
             explo.y+=random_range(sprite_width*0.25,sprite_width*-0.25);
         }
         
     }
-    x=-7000;y=room_height/2;
+    x=-7000;
+	y=room_height/2;
 }
 if (hp>0) and (instance_exists(obj_en_ship)){
     if (cooldown[1]>0) then cooldown[1]-=1;
@@ -72,9 +74,10 @@ if (hp>0) and (instance_exists(obj_en_ship)){
     dist=point_distance(x,y,target.x,target.y)-(max(sprite_get_width(sprite_index),sprite_get_height(sprite_index)));
     
     // STC Bonuses
-    var ts;ts=0.2;if (obj_controller.stc_bonus[5]=3) then ts+=0.1;
-    
-    
+    var ts;
+	ts=0.2;
+	if (obj_controller.stc_bonus[5]=3) then ts+=0.1;
+
     if (paction!="move") and (paction!="attack_move") and (paction!="turn") and (paction!="attack_turn"){
         if (target!=0) and (action="attack"){
             direction=turn_towards_point(direction,x,y,target.x,target.y,ts/2);

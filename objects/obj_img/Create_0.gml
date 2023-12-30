@@ -55,8 +55,22 @@ slate_good=false;
 
 // End Image Replacer
 // Start Text Replacer
+
+scr_image("title_splash",-50,0,0,0,0)
 scr_image("force",-50,0,0,0,0)
-
-
-
-
+scr_image("diplomacy_icon",-50,0,0,0,0);
+scr_image("symbol",-50,0,0,0,0);
+scr_image("diplomacy_splash",-50,0,0,0,0)
+scr_image("advisor",-50,0,0,0,0)
+scr_image("diplomacy_daemon",-50,0,0,0,0)
+scr_image("formation",-50,0,0,0,0)
+scr_image("menu",-50,0,0,0,0)
+scr_image("postspace",-50,0,0,0,0)
+scr_image("popup",-50,0,0,0,0)
+scr_image("commander",-50,0,0,0,0)
+scr_image("slate",-50,0,0,0,0)
+scr_image("planet",-50,0,0,0,0)
+scr_image("attacked",-50,0,0,0,0)
+scr_image("purge",-50,0,0,0,0)
+scr_image("event",-50,0,0,0,0)
+scr_image("defeat",-50,0,0,0,0)

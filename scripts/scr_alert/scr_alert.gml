@@ -8,15 +8,15 @@ function scr_alert(argument0, argument1, argument2, argument3, argument4) {
 
 
 	// if (obj_turn_end.alerts>0){
-	if (instance_exists(obj_turn_end)){
-	    if (obj_turn_end.alert_type[obj_turn_end.alerts]!="-"+string(argument2)) and (argument1!="blank") and (argument0!="blank"){
-	        obj_turn_end.alerts+=1;
-	        obj_turn_end.alert[obj_turn_end.alerts]=1;
-	        obj_turn_end.alert_color[obj_turn_end.alerts]=argument0;
+	with(obj_turn_end) {
+	    if (alert_type[alerts] != "-" + string(argument2)) and (argument1!="blank") and (argument0!="blank"){
+	        alerts+=1;
+	        alert[alerts]=1;
+	        alert_color[alerts]=argument0;
 	        // if (argument0="purple") then obj_turn_end.alert_color[obj_turn_end.alerts]="red";
-	        obj_turn_end.alert_type[obj_turn_end.alerts]=argument1;
-	        obj_turn_end.alert_text[obj_turn_end.alerts]="-"+string(argument2);
-	        obj_turn_end.alert[obj_turn_end.alerts]=1;
+	        alert_type[alerts]=argument1;
+	        alert_text[alerts]="-"+string(argument2);
+	        alert[alerts]=1;
 	    }
 	}
 	// }
@@ -56,6 +56,4 @@ function scr_alert(argument0, argument1, argument2, argument3, argument4) {
 	    new_obj=instance_create(xx+16,yy-24,obj_star_event);
 	    new_obj.col=argument0;
 	}
-
-
 }

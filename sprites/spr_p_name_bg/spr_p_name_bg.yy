@@ -10,7 +10,7 @@
   "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
-  "edgeFiltering": false,
+  "edgeFiltering": true,
   "For3D": false,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"a11f2334-9852-4e7b-b697-8d03d2b129a2",},
@@ -18,7 +18,7 @@
   "gridX": 0,
   "gridY": 0,
   "height": 272,
-  "HTile": false,
+  "HTile": true,
   "layers": [
     {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"db370ee7-9838-4a55-b76a-d78fe1ce202b","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],

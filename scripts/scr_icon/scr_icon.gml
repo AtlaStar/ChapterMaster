@@ -92,9 +92,16 @@ function scr_icon(argument0) {
 	    if (icon_name="custom4") then icon=i;i+=1;*/
 	}
 
-	if (argument0="-"){icon-=1;if (icon<0) then icon=80;if (icon>=17) and (icon<=20) then icon=16;}
-	if (argument0="+"){icon+=1;if (icon>80) then icon=0;if (icon>=17) and (icon<=20) then icon=21;}
-	if (argument0="=") then icon+=0;
+	if (argument0="-") {
+		icon-=1;
+		if (icon<0) then icon=80;
+		if (icon>=17) and (icon<=20) then icon=16;
+	}
+	if (argument0="+") {
+		icon+=1;
+		if (icon>80) then icon=0;
+		if (icon>=17) and (icon<=20) then icon=21;
+	}
 	if (argument0="random") then icon=random(floor(33))+2;
 
 

@@ -36,11 +36,20 @@ eldar_fleet=0;
 ork_fleet=0;
 tau_fleet=0;
 tyranid_fleet=0;
-heretic_fleet=0;
+chaos_fleet=0;
 
-en_fleet[0]=0;
-var i;i=-1;
-repeat(15){i+=1;en_fleet[i]=0;}
+en_fleet = []
+//var i;i=-1;
+//repeat(15){i+=1;en_fleet[i]=0;}
 
 if (obj_controller.menu=0) then alarm[1]=1;
 
+with obj_ini {
+	array_foreach(role, function(elem, idx) {
+		show_debug_message(elem)	
+	})
+	array_foreach(role[100], function(elem, idx) {
+		if elem != ""
+			show_debug_message($"{elem} is at idx: {idx}")
+	})
+}

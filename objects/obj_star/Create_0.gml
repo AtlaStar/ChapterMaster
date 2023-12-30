@@ -97,20 +97,20 @@ ai_d=-1;
 ai_e=-1;
 
 global.star_name_colors = [
-	38144,
-	c_white, //player
-	c_gray, //imperium
-	c_red, // toaster fuckers
-	38144, //nothing for inquisition
-	c_white, //ecclesiarchy
-	#FF8000, //Hi, I'm Elfo
-	#009500, // waagh
-	#FECB01, // the greater good
-	#AD5272,// bug boys
-	c_purple, // chaos
-	38144, //nothing for heretics either
-	38144, //why 12 is skipped in general, we will never know
-	#80FF00 // Sleepy robots
+	eCitColor.BestialBrown,
+	eCitColor.SkullWhite, //player
+	eCitColor.CodexGrey,//imperium
+	eCitColor.JokaeroOrange, // toaster fuckers
+	eCitColor.GhostlyGrey, //nothing for inquisition
+	eCitColor.SkullWhite, //ecclesiarchy
+	eCitColor.ElfFlesh, //Hi, I'm Elfo
+	eCitColor.SnotGreen, // waagh
+	eCitColor.TauLightOchre, // the greater good
+	eCitColor.HormagauntPurple,// bug boys
+	eCitColor.WarlockPurple, // chaos
+	eCitColor.BestialBrown, //nothing for heretics either
+	eCitColor.BestialBrown, //why 12 is skipped in general, we will never know
+	eCitColor.WarbossGreen // Sleepy robots
 ]
 
 
@@ -127,12 +127,14 @@ ui_node.add_element(system_name_element, 0, 0, 0, 0)
 	.add_component(UISpriteRendererComponent)
 		.set_sprite(spr_p_name_bg)
 		.set_callback(function(context) {
-			if (owner != eFACTION.Player ){
-				context.set_color_solid(global.star_name_colors[owner])
-			} else {
+			if owner == eFACTION.Player {
 				var main_color = make_color_rgb(obj_controller.targetR1 *255, obj_controller.targetG1 * 255, obj_controller.targetB1 * 255)
 				var pauldron_color = make_color_rgb(obj_controller.targetR3 *255, obj_controller.targetG3 *255, obj_controller.targetB3 *255)
 				context.set_vertical_gradient(main_color, pauldron_color)
+			} else if owner == eFACTION.Tyranids {
+				context.set_vertical_gradient(eCitColor.LichePurple, eCitColor.HormagauntPurple)
+			} else {
+				context.set_color_solid(global.star_name_colors[owner])	
 			}
 		})
 	.finalize()
@@ -174,4 +176,3 @@ ui_node.add_element(system_name_element, 0, 0, 0, 0)
 			.set_image_speed(0)
 		.finalize()
 	.finalize()
-

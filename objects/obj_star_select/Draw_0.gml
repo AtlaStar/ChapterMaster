@@ -35,10 +35,14 @@ if (target.craftworld=0) and (target.space_hulk=0){
 }
 
 if (target.craftworld=0) and (target.space_hulk=0){
-    if (target.owner  = eFACTION.Player) or (target.owner = eFACTION.Ecclesiarchy) then draw_set_color(c_white);if (target.owner = eFACTION.Imperium) then draw_set_color(c_gray);
-    if (target.owner = eFACTION.Mechanicus) then draw_set_color(c_red);if (target.owner = eFACTION.Ork) then draw_set_color(38144);
-    if (target.owner = eFACTION.Tau) then draw_set_color(117758);if (target.owner = eFACTION.Tyranids) then draw_set_color(7492269);
-    if (target.owner = eFACTION.Chaos) then draw_set_color(c_purple);if (target.owner = eFACTION.Necrons) then draw_set_color(65408);
+    if (target.owner  = eFACTION.Player) or (target.owner = eFACTION.Ecclesiarchy) then draw_set_color(c_white);
+	if (target.owner = eFACTION.Imperium) then draw_set_color(c_gray);
+    if (target.owner = eFACTION.Mechanicus) then draw_set_color(c_red);
+	if (target.owner = eFACTION.Ork) then draw_set_color(38144);
+    if (target.owner = eFACTION.Tau) then draw_set_color(117758);
+	if (target.owner = eFACTION.Tyranids) then draw_set_color(7492269);
+    if (target.owner = eFACTION.Chaos) then draw_set_color(c_purple);
+	if (target.owner = eFACTION.Necrons) then draw_set_color(65408);
     draw_text_transformed(xx+184,yy+180,string_hash_to_newline(string(target.name)+" System"),1,1,0);
 }
 
@@ -75,20 +79,36 @@ var pt,xxx;pt=0;
 repeat(4){
     pt+=1;xxx=159-41+(pt*41);
     if (target.planets>=pt) and (target.craftworld=0) and (target.space_hulk=0){
-        if (target.p_type[pt]="Lava") then temp1=0;if (target.p_type[pt]="Desert") then temp1=2;
-        if (target.p_type[pt]="Dead") then temp1=12;if (target.p_type[pt]="Hive") then temp1=4;
-        if (target.p_type[pt]="Temperate") or (target.p_type[pt]="Feudal") then temp1=8;if (target.p_type[pt]="Agri") then temp1=6;
-        if (target.p_type[pt]="Death") then temp1=5;if (target.p_type[pt]="Ice") then temp1=10;
-        if (target.p_type[pt]="Forge") then temp1=3;if (target.p_type[pt]="Daemon") then temp1=14;
-        if (target.p_type[pt]="Shrine") then temp1=15;draw_sprite(spr_planets,temp1,xx+xxx,yy+287);
+        if (target.p_type[pt]="Lava") then temp1=0;
+		//1 unused
+		if (target.p_type[pt]="Desert") then temp1=2;
+        if (target.p_type[pt]="Forge") then temp1=3;
+		if (target.p_type[pt]="Hive") then temp1=4;
+        if (target.p_type[pt]="Death") then temp1=5;
+		if (target.p_type[pt]="Agri") then temp1=6;
+		//7 unused
+        if (target.p_type[pt]="Temperate") or (target.p_type[pt]="Feudal") then temp1=8;
+		//9 unused, could be barren
+		if (target.p_type[pt]="Ice") then temp1=10;
+		//11 unused, could be Ocean world
+        if (target.p_type[pt]="Dead") then temp1=12;
+		//13 unused, could be badlands world
+		if (target.p_type[pt]="Daemon") then temp1=14;
+        if (target.p_type[pt]="Shrine") then temp1=15;
+		draw_sprite(spr_planets,temp1,xx+xxx,yy+287);
         
-        if (target.p_owner[pt]=1) then draw_set_color(c_blue);if (target.p_owner[pt]=2) then draw_set_color(c_gray);
-        if (target.p_owner[pt]=3) then draw_set_color(16512);if (target.p_owner[pt]=5) then draw_set_color(c_white);
-        if (target.p_owner[pt]=7) then draw_set_color(38144);if (target.p_owner[pt]=8) then draw_set_color(117758);
+        if (target.p_owner[pt]=1) then draw_set_color(c_blue);
+		if (target.p_owner[pt]=2) then draw_set_color(c_gray);
+        if (target.p_owner[pt]=3) then draw_set_color(16512);
+		if (target.p_owner[pt]=5) then draw_set_color(c_white);
+        if (target.p_owner[pt]=7) then draw_set_color(38144);
+		if (target.p_owner[pt]=8) then draw_set_color(117758);
         if (target.p_owner[pt]=10) then draw_set_color(c_purple);
         
-        if (pt=1) then draw_text(xx+xxx,yy+255,string_hash_to_newline("I"));if (pt=2) then draw_text(xx+xxx,yy+255,string_hash_to_newline("II"));
-        if (pt=3) then draw_text(xx+xxx,yy+255,string_hash_to_newline("III"));if (pt=4) then draw_text(xx+xxx,yy+255,string_hash_to_newline("IV"));
+        if (pt=1) then draw_text(xx+xxx,yy+255,string_hash_to_newline("I"));
+		if (pt=2) then draw_text(xx+xxx,yy+255,string_hash_to_newline("II"));
+        if (pt=3) then draw_text(xx+xxx,yy+255,string_hash_to_newline("III"));
+		if (pt=4) then draw_text(xx+xxx,yy+255,string_hash_to_newline("IV"));
     }
 }
 
@@ -356,8 +376,9 @@ if (obj_controller.selecting_planet!=0){
 
 
 if (target!=0){
-    if (player_fleet>0) and (imperial_fleet+mechanicus_fleet+inquisitor_fleet+eldar_fleet+ork_fleet+tau_fleet+heretic_fleet>0){
-        draw_set_color(0);draw_set_alpha(0.75);
+    if (player_fleet>0) and (imperial_fleet+mechanicus_fleet+inquisitor_fleet+eldar_fleet+ork_fleet+tau_fleet+chaos_fleet>0){
+        draw_set_color(0);
+		draw_set_alpha(0.75);
         draw_rectangle(xx+37,yy+413,xx+270,yy+452,0);
         draw_set_alpha(1);
         
@@ -377,8 +398,8 @@ if (target!=0){
         // x3=xx+46;y3=yy+252;
         x3=xx+49;y3=yy+441;
         
-        repeat(7){i+=1;
-            if (en_fleet[i]>0){
+        for(var i = 0; i < array_length(en_fleet); i++) {
+            if (en_fleet[i]){
                 // draw_sprite_ext(spr_force_icon,en_fleet[i],x3,y3,0.5,0.5,0,c_white,1);
                 scr_image("force",en_fleet[i],x3-16,y3-16,32,32);
                 x3+=64;
@@ -400,15 +421,20 @@ if (debug=1){
     yy=__view_get( e__VW.YView, 0 )+0;
     
     if (scr_hit(xx+274,yy+426,xx+337,yy+451)=true) and (obj_controller.cooldown<=0) and (obj_controller.mouse_left=1){
-        debug=0;obj_controller.cooldown=8000;exit;
+        debug=0;
+		obj_controller.cooldown=8000;
+		exit;
     }
     
     xx=__view_get( e__VW.XView, 0 )+27;
     yy=__view_get( e__VW.YView, 0 )+165;
     pp=obj_controller.selecting_planet;
     
-    draw_set_color(c_black);draw_rectangle(xx+9,yy+9,xx+310,yy+260,0);
-    draw_set_font(fnt_40k_14b);draw_set_color(c_gray);draw_set_halign(fa_left);
+    draw_set_color(c_black);
+	draw_rectangle(xx+9,yy+9,xx+310,yy+260,0);
+    draw_set_font(fnt_40k_14b);
+	draw_set_color(c_gray);
+	draw_set_halign(fa_left);
     
     draw_text(xx+11,yy+11,string_hash_to_newline("Orks: "+string(target.p_orks[pp])));
     draw_text(xx+11,yy+31,string_hash_to_newline("Tau: "+string(target.p_tau[pp])));

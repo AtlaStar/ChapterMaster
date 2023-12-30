@@ -20,25 +20,33 @@ if (type>0){
         if (type=5) then draw_text_transformed(444,550,string_hash_to_newline("Trim Color"),0.6,0.6,0);
         if (type=6) then draw_text_transformed(444,550,string_hash_to_newline("Lens Color"),0.6,0.6,0);
         if (type=7) then draw_text_transformed(444,550,string_hash_to_newline("Weapon Color"),0.6,0.6,0);
-    
-        rows=floor(obj_creation.colors)+1;
+		var cols = 14
+        var rows = ceil(obj_creation.colors/cols);
         var coli,cu,tot;cu=0;coli=0;tot=0;
-        repeat(rows){coli+=1;cu=0;
-            repeat(10){cu+=1;tot+=1;
+        repeat(rows){
+			coli+=1;
+			cu=0;
+            repeat(cols){
+				cu+=1;
+				tot+=1;
                 if (tot<=obj_creation.colors){
                     draw_set_color(make_color_rgb(obj_creation.col_r[tot],obj_creation.col_g[tot],obj_creation.col_b[tot]));
                     
                     var x1,x2,y1,y2;
-                    x1=395+(cu*40);y1=541+(coli*40);
-                    x2=435+(cu*40);y2=581+(coli*40);
+                    x1=427+(cu*20) + cu;
+					y1=560+(coli*20) + coli;
+                    x2=x1+20;
+					y2=y1+20;
                     
                     draw_rectangle(x1,y1,x2,y2,0);
                     draw_set_color(38144);
-                    draw_rectangle(x1,y1,x2,y2,1);
+                    draw_rectangle(x1,y1,x2-1,y2-1,1);
                     
                     if (scr_hit(x1,y1,x2,y2)=true){
-                        draw_set_color(c_white);draw_set_alpha(0.2);
-                        draw_rectangle(x1,y1,x2,y2,0);draw_set_alpha(1);
+                        draw_set_color(c_white);
+						draw_set_alpha(0.2);
+                        draw_rectangle(x1,y1,x2,y2,0);
+						draw_set_alpha(1);
                         
                         if (obj_creation.mouse_left=1) and (obj_creation.cooldown<=0){
                             if (type=1) then obj_creation.main_color=tot;
@@ -48,8 +56,11 @@ if (type>0){
                             if (type=5) then obj_creation.trim_color=tot;
                             if (type=6) then obj_creation.lens_color=tot;
                             if (type=7) then obj_creation.weapon_color=tot;
-                            with(obj_creation){shader_reset();}
-                            obj_creation.alarm[0]=1;obj_creation.cooldown=8000;
+                            with(obj_creation){
+								shader_reset();
+							}
+                            obj_creation.alarm[0]=1;
+							obj_creation.cooldown=8000;
                             instance_destroy();
                         }
                     }

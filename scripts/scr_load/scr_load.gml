@@ -401,15 +401,16 @@ function scr_load(argument0, argument1) {
 
 	    // Stars
 	    var i;i=-1;
-	    repeat(stars){i+=1;
-	        var new_star;new_star=instance_create(0,0,obj_star);
+		var new_star;
+	    repeat(stars) { i+=1;
+			var xx=ini_read_real("Star","sr"+string(i)+"x",0);
+	        var yy=ini_read_real("Star","sr"+string(i)+"y",0);
+			new_star=instance_create(xx,yy,obj_star);
 
 	        new_star.name=ini_read_string("Star","sr"+string(i)+"name","");
 	        new_star.star=ini_read_string("Star","sr"+string(i)+"star","");
 	        new_star.planets=ini_read_real("Star","sr"+string(i)+"planets",0);
 	        new_star.owner=ini_read_real("Star","sr"+string(i)+"owner",0);
-	        new_star.x=ini_read_real("Star","sr"+string(i)+"x",0);
-	        new_star.y=ini_read_real("Star","sr"+string(i)+"y",0);
 	        new_star.x2=ini_read_real("Star","sr"+string(i)+"x2",0);
 	        new_star.y2=ini_read_real("Star","sr"+string(i)+"y2",0);
 	        new_star.old_x=ini_read_real("Star","sr"+string(i)+"ox",0);
@@ -497,19 +498,17 @@ function scr_load(argument0, argument1) {
 	                ini_write_string("Star","sr"+string(i)+"prob"+string(g)+".4",instance_array[i].p_problem[g,4]);
 	                ini_write_real("Star","sr"+string(i)+"time"+string(g)+".4",instance_array[i].p_timer[g,4]);
 	                */
-
-
-
-	                new_star.p_problem[g,1]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".1","");
-	                new_star.p_timer[g,1]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".1",0);
-	                new_star.p_problem[g,2]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".2","");
-	                new_star.p_timer[g,2]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".2",0);
-	                new_star.p_problem[g,3]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".3","");
-	                new_star.p_timer[g,3]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".3",0);
-	                new_star.p_problem[g,4]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".4","");
-	                new_star.p_timer[g,4]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".4",0);
+					
+	                new_star.p_problem[g][1]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".1","");
+	                new_star.p_timer[g][1]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".1",0);
+	                new_star.p_problem[g][2]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".2","");
+	                new_star.p_timer[g][2]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".2",0);
+	                new_star.p_problem[g][3]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".3","");
+	                new_star.p_timer[g][3]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".3",0);
+	                new_star.p_problem[g][4]=ini_read_string("Star","sr"+string(i)+"prob"+string(g)+".4","");
+	                new_star.p_timer[g][4]=ini_read_real("Star","sr"+string(i)+"time"+string(g)+".4",0);
 	            }
-	        }
+	        }		
 	    }
 
 	    // obj_ini

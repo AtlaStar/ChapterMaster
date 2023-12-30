@@ -32,6 +32,27 @@ function scr_is_planet_owned_by_allies(star, planet_idx) {
 	return array_contains(NSystemSearchHelpers.default_allies, star.p_owner[planet_idx])
 }
 
+function scr_does_planet_have_player_forces(star, planet_idx) {
+	return star.present_fleet[eFACTION.Player] || star.p_player[planet_idx] > 0
+}
+
+
+function scr_get_np_forces(star, planet_idx) {
+	var val = 0;
+	
+	val += star.p_orks[planet_idx]
+	val += star.p_chaos[planet_idx]
+	val += star.p_tau[planet_idx]
+	val += star.p_tyranids[planet_idx]
+	val += star.p_demons[planet_idx]
+	val += star.p_necrons[planet_idx]
+	val += star.p_eldar[planet_idx]
+	val += star.p_guardsmen[planet_idx]
+	val += star.p_sisters[planet_idx]
+	val += star.p_pdf[planet_idx]
+	return val
+}
+
 function scr_is_star_owned_by_allies(star) {
 	return array_contains(NSystemSearchHelpers.default_allies, star.owner)
 }

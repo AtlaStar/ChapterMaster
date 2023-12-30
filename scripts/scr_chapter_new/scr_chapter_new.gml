@@ -4,9 +4,23 @@ function scr_chapter_new(argument0) {
 
 
 	var i;i=-1;
-	repeat(21){i+=1;world[i]="";world_type[i]="";world_feature[i]="";}
-	var i;i=-1;repeat(6){i+=1;adv[i]="";adv_num[i]=0;dis[i]="";dis_num[i]=0;}
-	points=100;maxpoints=100;custom=0;
+	repeat(21) {
+		i+=1;
+		world[i]="";
+		world_type[i]="";
+		world_feature[i]="";
+	}
+	i=-1;
+	repeat(6) {
+		i+=1;
+		adv[i]="";
+		adv_num[i]=0;
+		dis[i]="";
+		dis_num[i]=0;
+	}
+	points=100;
+	maxpoints=100;
+	custom=0;
 
 	hapothecary=scr_marine_name();
 	hchaplain=scr_marine_name();
@@ -32,37 +46,80 @@ function scr_chapter_new(argument0) {
 	    role[i,17]="Librarian";wep1[i,17]="Force Weapon";wep2[i,17]="Storm Bolter";armour[i,17]="Power Armour";gear[i,17]="Psychic Hood";
 		role[i,18]="Sergeant";wep1[i,18]="Chainsword";wep2[i,18]="Storm Bolter";armour[i,18]="Power Armour";gear[i,18]="";
 		role[i,19]="Veteran Sergeant";wep1[i,19]="Chainsword";wep2[i,19]="Storm Bolter";armour[i,19]="Power Armour";gear[i,19]="";
-	}i=100;
-
+	}
+	i=100;
 	chapter="nopw_nopw";
+	
+	if (argument0="Dark Angels") {
+		founding="N/A";
+		chapter=argument0;
+	    selected_chapter=1;
+		icon=1;
+		icon_name="da";
+		points=150;
 
-
-
-
-
-
-	if (argument0="Dark Angels"){founding="N/A";points=150;
-	    selected_chapter=1;chapter=argument0;icon=1;icon_name="da";founding=0;fleet_type=1;strength=10;purity=8;stability=10;cooperation=5;
-	    homeworld="Dead";homeworld_name="The Rock";recruiting_world="Death";recruiting_name="Kimmeria";
-	    homeworld_exists=1;recruiting_exists=1;homeworld_rule=3;aspirant_trial="Survival of the Fittest";
-	    adv[1]="Enemy: Fallen";dis[1]="Never Forgive";
+		founding=0;
+		fleet_type=1;
+		strength=10;
+		purity=8;
+		stability=10;
+		cooperation=5;
+	    homeworld="Dead";
+		homeworld_name="The Rock";
+		recruiting_world="Death";
+		recruiting_name="Kimmeria";
+	    homeworld_exists=1;
+		recruiting_exists=1;
+		homeworld_rule=3;
+		aspirant_trial="Survival of the Fittest";
+	    adv[1]="Enemy: Fallen";
+		dis[1]="Never Forgive";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Dark Green";color_to_secondary="Dark Green";color_to_trim="Silver";
-	    color_to_pauldron="Dark Green";color_to_pauldron2="Dark Green";color_to_lens="Dark Red";
-	    color_to_weapon="Black";col_special=0;trim=0;
-	    hchaplain="Sapphon";clibrarian="Ezekial";fmaster="Sepharon";hapothecary="Razaek";
-		admiral="Korahael";recruiter="Ranaeus";
+	    color_to_main="Caliban Green";
+		color_to_secondary="Caliban Green";
+		color_to_trim="Runefang Steel";
+	    color_to_pauldron="Caliban Green";
+		color_to_pauldron2="Caliban Green";
+		color_to_lens="Scab Red";
+	    color_to_weapon="Corvus Black";
+		col_special=0;
+		trim=0;
+	    hchaplain="Sapphon";
+		clibrarian="Ezekial";
+		fmaster="Sepharon";
+		hapothecary="Razaek";
+		admiral="Korahael";
+		recruiter="Ranaeus";
 	    battle_cry="Repent!  For tomorow you may die";
-	    equal_specialists=0;load_to_ships=[2,0,0];successors=9;
-	    mutations=0;mutations_selected=0;
-	    preomnor=0;voice=0;doomed=0;lyman=0;omophagea=0;ossmodula=0;membrane=0;
-	    zygote=0;betchers=0;catalepsean=0;secretions=0;occulobe=0;mucranoid=0;
+	    equal_specialists=0;
+		load_to_ships=[2,0,0];
+		successors=9;
+	    mutations=0;
+		mutations_selected=0;
+	    preomnor=0;
+		voice=0;
+		doomed=0;
+		lyman=0;
+		omophagea=0;
+		ossmodula=0;
+		membrane=0;
+	    zygote=0;
+		betchers=0;
+		catalepsean=0;
+		secretions=0;
+		occulobe=0;
+		mucranoid=0;
 	    // disposition[1]=0;// Prog
-	    disposition[2]=65;disposition[3]=60;disposition[4]=60;disposition[5]=60;
-	    disposition[6]=50;// Astartes
-	    disposition[7]=0;// Reserved
-	    chapter_master_name="Azreal";chapter_master_specialty=2;
-	    chapter_master_melee=4;chapter_master_ranged=4;
+	    disposition[2]=65;
+		disposition[3]=60;
+		disposition[4]=60;
+		disposition[5]=60;
+	    disposition[6]=50; // Astartes
+	    disposition[7]=0;  // Reserved
+	    chapter_master_name="Azreal";
+		chapter_master_specialty=2;
+	    chapter_master_melee=4;
+		chapter_master_ranged=4;
 		
 	    company_title[1]="Deathwing";
 	    company_title[2]="Ravenwing";
@@ -76,9 +133,8 @@ function scr_chapter_new(argument0) {
 		company_title[10]="The Redeemed";
 		
 		for(i=100;i<=102;i++){
-		role[i,5]="Master";
-		wep1[i,5]="Power Sword";
-	
+			role[i,5]="Master";
+			wep1[i,5]="Power Sword";
 		}
 	}
 if (argument0="White Scars"){founding="N/A";points=150;
@@ -87,9 +143,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    homeworld_exists=1;recruiting_exists=0;homeworld_rule=3;aspirant_trial="Survival of the Fittest";discipline="rune Magick";
 		adv[1]="Lightning Warriors";adv[2]="Brothers, All";adv[3]="Melee Enthusiasts";dis[1]="Splintered";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="White";color_to_secondary="White";color_to_trim="Red";
-	    color_to_pauldron="White";color_to_pauldron2="White";color_to_lens="Red";
-	    color_to_weapon="Black";col_special=0;
+	    color_to_main="Skull White";color_to_secondary="Skull White";color_to_trim="Blood Red";
+	    color_to_pauldron="Skull White";color_to_pauldron2="Skull White";color_to_lens="Blood Red";
+	    color_to_weapon="Corvus Black";col_special=0;
 	    hapothecary="Ogholei";hchaplain="Jaghorin";clibrarian="Saghai";fmaster="Khamkar";
 		admiral="Joghaten";recruiter="Jodagha";
 	    battle_cry="For the Emperor and the Khan!";// monastery_name="Quan Zhou";master_name=
@@ -123,9 +179,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    homeworld="Temperate";homeworld_name="Macragge";recruiting_world="Death";recruiting_name="Parmenio";
 	    homeworld_exists=1;recruiting_exists=1;homeworld_rule=3;aspirant_trial="Exposure";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Ultramarine";color_to_secondary="Ultramarine";color_to_trim="Gold";
-	    color_to_pauldron="Ultramarine";color_to_pauldron2="Ultramarine";color_to_lens="Red";
-	    color_to_weapon="Red";col_special=0;
+	    color_to_main="Macragge Blue";color_to_secondary="Macragge Blue";color_to_trim="Burnished Gold";
+	    color_to_pauldron="Macragge Blue";color_to_pauldron2="Macragge Blue";color_to_lens="Blood Red";
+	    color_to_weapon="Blood Red";col_special=0;
 	    hapothecary="Corpus Helix";hchaplain="Ortan Cassius";clibrarian="Varro Tigurius";fmaster="Fennias Maxim";admiral="Lazlo Tiberius";
 	    battle_cry="Courage and honor";// monastery_name="Fortress of Hera";master_name=
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=27;
@@ -151,8 +207,8 @@ if (argument0="White Scars"){founding="N/A";points=150;
 		adv[1]="Bolter Drilling";adv[2]="Siege Masters";
 		homeworld="Ice";homeworld_name="Inwit";recruiting_world="Hive";recruiting_name="Necromunda";
 		homeworld_exists=1;recruiting_exists=1;homeworld_rule=2;aspirant_trial="Survival of the Fittest";
-		color_to_main="Gold";color_to_secondary="Gold";color_to_trim="Red";color_to_pauldron="Gold"
-		color_to_pauldron2="Gold";color_to_lens="Red";color_to_weapon="Black"
+		color_to_main="Dorn Yellow";color_to_secondary="Dorn Yellow";color_to_trim="Blood Red";color_to_pauldron="Dorn Yellow"
+		color_to_pauldron2="Dorn Yellow";color_to_lens="Blood Red";color_to_weapon="Corvus Black"
 		hapothecary="Dyserna";hchaplain="Guaron";clibrarian="Vidos Harn";fmaster="Atornus Geis";admiral="Kyne Phasn"
                 recruiter="Taelos"
 		battle_cry="Primarch-Progenitor, to your glory and the glory of him on earth!";
@@ -184,9 +240,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    homeworld="Ice";homeworld_name="Fenris";recruiting_world="Death";recruiting_name="Parmenio";
 	    homeworld_exists=1;recruiting_exists=0;homeworld_rule=2;aspirant_trial="Exposure";discipline="rune Magick";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Fenrisian Grey";color_to_secondary="Fenrisian Grey";color_to_trim="Gold";
-	    color_to_pauldron="Gold";color_to_pauldron2="Gold";color_to_lens="Dark Red";
-	    color_to_weapon="Blue";col_special=0;trim=0;
+	    color_to_main="Fenrisian Grey";color_to_secondary="Fenrisian Grey";color_to_trim="Burnished Gold";
+	    color_to_pauldron="Burnished Gold";color_to_pauldron2="Burnished Gold";color_to_lens="Scab Red";
+	    color_to_weapon="Kantor Blue";col_special=0;trim=0;
 	    hapothecary="Ranek Icewalker";hchaplain="Ulrik the Slayer";clibrarian="Njal Stormcaller";fmaster="Krom Dragongaz";admiral="Engir Krakendoom";
 	    battle_cry="For Russ and the Allfather";// monastery_name="Fortress of Hera";master_name=
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=1;
@@ -230,9 +286,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    homeworld="Desert";homeworld_name="Baal";
 	    homeworld_exists=1;recruiting_exists=0;homeworld_rule=3;aspirant_trial="Blood Duel";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Red";color_to_secondary="Red";color_to_trim="Black";
-	    color_to_pauldron="Red";color_to_pauldron2="Red";color_to_lens="Dark Green";
-	    color_to_weapon="Black";col_special=0;trim=0;
+	    color_to_main="Mephiston Red";color_to_secondary="Mephiston Red";color_to_trim="Corvus Black";
+	    color_to_pauldron="Mephiston Red";color_to_pauldron2="Mephiston Red";color_to_lens="Caliban Green";
+	    color_to_weapon="Corvus Black";col_special=0;trim=0;
 	    hchaplain="Astorash the Grim";clibrarian="Mephiston";fmaster="Incarael";
 	    battle_cry="For the Emperor and Sanguinius! Death! DEATH";// monastery_name="Fortress of Hera";master_name=
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=3;
@@ -250,7 +306,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    company_title[7]="Unconquerables";company_title[8]="Bloodbanes";company_title[9]="Sunderers";
 	    company_title[10]="Redeemers";
     
-	    i=99;repeat(3){i+=1;
+	    i=99;
+		repeat(3){
+			i+=1;
 	        role[i,2]="Sanguinary Guard";wep1[i,2]="Power Axe";wep2[i,2]="Bolt Pistol";mobi[i,2]="Jump Pack";
 	        role[i,15]="Sanguinary Priest";wep1[i,15]="Power Axe";
 	    }
@@ -263,9 +321,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    homeworld="Lava";homeworld_name="Medusa";homeworld_exists=1;recruiting_exists=0;
 	    homeworld_rule=3;aspirant_trial="Knowledge of Self";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Black";color_to_secondary="Black";color_to_trim="Silver";
-	    color_to_pauldron="Black";color_to_pauldron2="Black";color_to_lens="Dark Red";
-	    color_to_weapon="Silver";col_special=0;trim=0;
+	    color_to_main="Abaddon Black";color_to_secondary="Abaddon Black";color_to_trim="Runefang Steel";
+	    color_to_pauldron="Corvus Black";color_to_pauldron2="Corvus Black";color_to_lens="Scab Red";
+	    color_to_weapon="Runefang Steel";col_special=0;trim=0;
 	    hchaplain="Jorggir Shidd";clibrarian="Lydriik";fmaster="Feirros";hapothecary="Anaar Telech";
 	    battle_cry="The flesh is weak";// monastery_name="Fortress of Hera";master_name=
 	    equal_specialists=1;load_to_ships=[2,0,0];successors=6;
@@ -298,9 +356,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    homeworld="Lava";homeworld_name="Nocturne";homeworld_exists=1;recruiting_exists=0;
 	    homeworld_rule=1;aspirant_trial="Apprenticeship";discipline="pyromancy";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Green";color_to_secondary="Green";color_to_trim="Copper";
-	    color_to_pauldron="Black";color_to_pauldron2="Black";color_to_lens="Dark Red";
-	    color_to_weapon="Black";col_special=0;trim=0;
+	    color_to_main="Snot Green";color_to_secondary="Snot Green";color_to_trim="Hashut Copper";
+	    color_to_pauldron="Abaddon Black";color_to_pauldron2="Abaddon Black";color_to_lens="Scab Red";
+	    color_to_weapon="Abaddon Black";col_special=0;trim=0;
 	    fmaster="Argos";clibrarian="Velcona";hapothecary="Harath Shen";recruiter="Sol Ba'ken";admiral="Dac'tyr";hchaplain="Elysius";
 	    battle_cry="Into the fires of battle!  Unto the anvil of war";// monastery_name="Fortress of Hera";master_name=
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=2;
@@ -333,9 +391,9 @@ if (argument0="White Scars"){founding="N/A";points=150;
 	    recruiting_world="Death";recruiting_name="Trontiux";
 	    homeworld_rule=0;aspirant_trial="Knowledge of Self";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Sanguine";color_to_secondary="Sanguine";color_to_trim="Black";
-	    color_to_pauldron2="Bone";color_to_pauldron="Bone";color_to_lens="Green";
-	    color_to_weapon="Black";col_special=0;trim=1;
+	    color_to_main="Scab Red";color_to_secondary="Scab Red";color_to_trim="Corvus Black";
+	    color_to_pauldron2="Bleached Bone";color_to_pauldron="Bleached Bone";color_to_lens="Snot Green";
+	    color_to_weapon="Abaddon Black";col_special=0;trim=1;
 	    battle_cry="Knowledge is power, guard it well";
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=0;
 	    mutations=0;mutations_selected=0;
@@ -354,8 +412,8 @@ if (argument0="Crimson Fists"){founding="N/A";points=150;
 		adv[1]="Bolter Drilling";adv[2]="Enemy: Orks";dis[1]="Sieged";
 		homeworld="Agri";homeworld_name="Rynn's World";
 		homeworld_exists=1;recruiting_exists=0;homeworld_rule=1;aspirant_trial="Challenge"
-		color_to_main="Blue";color_to_secondary="Blue";color_to_trim="White";color_to_pauldron="Blue"
-		color_to_pauldron2="Blue";color_to_lens="Red";color_to_weapon="Black"
+		color_to_main="Kantor Blue";color_to_secondary="Kantor Blue";color_to_trim="Skull White";color_to_pauldron="Kantor Blue"
+		color_to_pauldron2="Kantor Blue";color_to_lens="Blood Red";color_to_weapon="Abaddon Black"
 		hapothecary="Curien Droga";hchaplain="Marqol Tomasi";clibrarian="Eustace Mendoza";fmaster="Javier Adon";admiral="Alessio Cortez"
                 recruiter="Ishmael Icario"
 		battle_cry="There is only the Emperor!  He is our shield and our protector!";
@@ -386,8 +444,8 @@ if (argument0="Crimson Fists"){founding="N/A";points=150;
 	    recruiting_world="Death";recruiting_name=scr_star_name();
 	    homeworld_rule=0;aspirant_trial="Challenge";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Purple";color_to_secondary="Purple";color_to_trim="Gold";
-	    color_to_pauldron2="Purple";color_to_pauldron="Purple";color_to_lens="Red";
+	    color_to_main="Liche Purple";color_to_secondary="Liche Purple";color_to_trim="Burnished Gold";
+	    color_to_pauldron2="Liche Purple";color_to_pauldron="Liche Purple";color_to_lens="Blood Red";
 	    color_to_weapon="Purple";col_special=0;trim=1;
 	    battle_cry="Cold and Hard, Soul Drinkers";
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=0;
@@ -415,9 +473,9 @@ if (argument0="Crimson Fists"){founding="N/A";points=150;
 	    recruiting_world="Death";recruiting_name=scr_star_name();
 	    homeworld_rule=0;aspirant_trial="Challenge";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Gold";color_to_secondary="Gold";color_to_trim="Gold";
-	    color_to_pauldron2="White";color_to_pauldron="Gold";color_to_lens="Dark Red";
-	    color_to_weapon="Black";col_special=0;trim=1;
+	    color_to_main="Sunburst Yellow";color_to_secondary="Sunburst Yellow";color_to_trim="Sunburst Yellow";
+	    color_to_pauldron2="Skull White";color_to_pauldron="Sunburst Yellow";color_to_lens="Scab Red";
+	    color_to_weapon="Abaddon Black";col_special=0;trim=1;
 	    battle_cry="For those we cherish, we die in Glory";
 	    equal_specialists=0;load_to_ships=[2,0,0];successors=0;
 	    mutations=0;mutations_selected=0;
@@ -439,9 +497,9 @@ if (argument0="Crimson Fists"){founding="N/A";points=150;
 	    homeworld="Forge";homeworld_name="Ariana Prime";recruiting_world="Death";recruiting_name=scr_star_name();
 	    homeworld_exists=1;recruiting_exists=1;homeworld_rule=2;aspirant_trial="Apprenticeship";
 	    // Pauldron2: Left, Pauldron: Right
-	    color_to_main="Dark Red";color_to_secondary="Black";color_to_trim="Copper";
-	    color_to_pauldron="Black";color_to_pauldron2="Black";color_to_lens="Sanguine";
-	    color_to_weapon="Black";col_special=0;trim=1;
+	    color_to_main="Scab Red";color_to_secondary="Abaddon Black";color_to_trim="Hashut Copper";
+	    color_to_pauldron="Abaddon Black";color_to_pauldron2="Abaddon Black";color_to_lens="Mephiston Red";
+	    color_to_weapon="Abaddon Black";col_special=0;trim=1;
 	    hapothecary="Vaylund";
 	    hchaplain="Eli";
 	    clibrarian="Dagoth";

@@ -6,14 +6,14 @@ the requested squad type , if the squad is not possible it will  not be made*/
 //squad_loadout: true if you want to use the squad loadout sorting algorithem to re-equip the squad in accordance with the squad type loadout
 
 
-function create_squad(squad_type, company, squad_loadout = true, squad_index=false){
-	var squad_unit_types, fulfilled,unit, squad;
+function create_squad(squad_type, company, squad_loadout = true, squad_index=false) {
+	var fulfilled, unit, squad;
 	var squad_count = array_length(obj_ini.squads);
-	var fill_squad =  obj_ini.squad_types[$ squad_type];			//grab all the squad struct info from the squad_types struct
-	var squad_fulfilment = {};		
-	squad_unit_types = struct_get_names(fill_squad);		//find out what type of units squad consists of
-	var unit_type_count = array_length(squad_unit_types);		
-	for (var i = 0;i < unit_type_count;i++){
+	var fill_squad =  obj_ini.squad_types[$ squad_type];	//grab all the squad struct info from the squad_types struct
+	var squad_fulfilment = {};
+	var squad_unit_types = struct_get_names(fill_squad);	//find out what type of units squad consists of
+	var unit_type_count = array_length(squad_unit_types);
+	for (var i = 0; i < unit_type_count; i++){
 		if (squad_unit_types[i] == "display_name"){
 			array_delete(squad_unit_types, i, 1);
 			unit_type_count--;
@@ -28,10 +28,10 @@ function create_squad(squad_type, company, squad_loadout = true, squad_index=fal
 	var sgt_types = [obj_ini.role[100][18], obj_ini.role[100][19]]
 
 	//if squad has sergeants in find out if there are any available sergeants
-	for (var s = 0; s< 2;s++){
+	for (var s = 0; s < 2; s++){
 		if (struct_exists(squad_fulfilment ,sgt_types[s])){
 			sergeant_found = false;
-			for (i = 0; i < array_length(obj_ini.TTRPG[company]);i++){
+			for (var i = 0; i < array_length(obj_ini.TTRPG[company]);i++){
 				if(!is_struct(obj_ini.TTRPG[company][i])){obj_ini.TTRPG[company][i]= new TTRPG_stats("chapter", company,i,"blank");}
 				unit = obj_ini.TTRPG[company][i];
 				if ((obj_ini.name[company][i] =="") or (unit.base_group=="none"))then continue;
@@ -46,7 +46,7 @@ function create_squad(squad_type, company, squad_loadout = true, squad_index=fal
 			}
 		}
 	}
-	for (i = 0; i < array_length( obj_ini.TTRPG[company]);i++){							//fill squad roles
+	for (var i = 0; i < array_length( obj_ini.TTRPG[company]);i++){							//fill squad roles
 		if(!is_struct(obj_ini.TTRPG[company][i])){obj_ini.TTRPG[company][i]= new TTRPG_stats("chapter", company,i,"blank");}
 		unit = obj_ini.TTRPG[company][i];
 		if ((obj_ini.name[company][i] =="") or (unit.base_group=="none")) then continue;
@@ -67,7 +67,7 @@ function create_squad(squad_type, company, squad_loadout = true, squad_index=fal
 	//if a new sergeant is needed find the marine with the highest experience in the squad 
 	//(which if everything works right should be a marine with the old_guard, seasoned, or ancient trait)
 	/*and ((squad_fulfilment[$ obj_ini.role[100][8]] > 4)or (squad_fulfilment[$ obj_ini.role[100][10]] > 4) or (squad_fulfilment[$ obj_ini.role[100][9]] > 4)or (squad_fulfilment[$ obj_ini.role[100][3]] > 4) )*/
-	for (var s = 0; s< 2;s++){
+	for (var s = 0; s< 2;s++) {
 		if (struct_exists(squad_fulfilment ,sgt_types[s])) and (!sergeant_found){
 			var highest_exp = 0;
 			var exp_unit;

@@ -245,17 +245,17 @@ function UINode(elem, gui_x, gui_y, padding = 0, margin = 0, parent = undefined)
 	}
 	
 	static activate = function() {
-		if is_active {
+		if self.is_active {
 			return;
 		}
 		is_active = true;
 		array_foreach(children, function(child) {
-			child.activate();	
+			child.activate();
 		})
 	}
 	
 	static deactivate = function() {
-		if !is_active {
+		if !self.is_active {
 			return;
 		}
 		is_active = false;
@@ -266,5 +266,12 @@ function UINode(elem, gui_x, gui_y, padding = 0, margin = 0, parent = undefined)
 	static clear = function() {
 		destroy_components()
 		array_resize(children, 0)
+	}
+	
+	static cleanup = function() {
+		array_foreach(children, function(elem) {
+			elem.cleanup()
+		})
+		destroy_components();
 	}
 }
