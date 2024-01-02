@@ -1,5 +1,5 @@
 function role_groups(group){
-	var role_list = false;
+	var role_list = [];
 	switch (group){
 		case "lib":
 			role_list = [
@@ -63,6 +63,11 @@ function role_groups(group){
 	            "Champion"
 	        ]; 
 	        break;
+	    case "dreadnoughts":
+	        role_list = [
+				obj_ini.role[100][6],//dreadnought
+				string("Venerable {0}",obj_ini.role[100][6]),
+			]
 	}
 	return role_list;
 }
@@ -71,7 +76,6 @@ function is_specialist(unit_role, type="standard", include_trainee=false) {
 
 	// unit_role
 	//TODO need to make all string roles not strings but array references
-	var _is_specialist=false;
 	switch(type){
 		case "standard":
 			specialists = ["Chapter Master",
@@ -81,6 +85,7 @@ function is_specialist(unit_role, type="standard", include_trainee=false) {
 							string("Chief {0}",obj_ini.role[100][17]),//chief librarian
 							obj_ini.role[100][5],//captain
 							obj_ini.role[100][6],//dreadnought
+							string("Venerable {0}",obj_ini.role[100][6]),
 							obj_ini.role[100][7],//company_champion
 							obj_ini.role[100][14],//chaplain
 							obj_ini.role[100][15],//apothecary
@@ -138,10 +143,18 @@ function is_specialist(unit_role, type="standard", include_trainee=false) {
 			break;
 		case "command":	
 			specialists = role_groups("command");
-			break;						
+			break;	
+		case "trainee":	
+			specialists = role_groups("trainee");
+			break;
+		case "rank_and_file":
+			specialists = role_groups("rank_and_file");
+			break;
+		case "squad_leaders":
+			specialists = role_groups("squad_leaders");
+		case "dreadnoughts":
+			specialists = role_groups("dreadnoughts");			
 	}
 
-	_is_specialist = (array_contains(specialists,unit_role)) ? true : false;
-
-	return _is_specialist;
+	return array_contains(specialists,unit_role);
 }

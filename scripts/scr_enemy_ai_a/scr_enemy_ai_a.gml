@@ -1,11 +1,16 @@
+
 function scr_enemy_ai_a() {
 
 	// guardsmen hop from planet to planet
 	if (p_guardsmen[1]+p_guardsmen[2]+p_guardsmen[3]+p_guardsmen[4]>0) and (present_fleet[2]>0){
-	    var o,mx,cr,tr;o=0;mx=0;cr=0;tr=0;
-	    repeat(4){o+=1;if (p_guardsmen[o]>0) and (cr=0) then cr=o;}
+	    var o=0,mx=0,cr=0,tr=0;
+	    repeat(planets){
+	    	o+=1;
+	    	if (p_guardsmen[o]>0) and (cr=0) then cr=o;
+	    }
 	    o=0;
-	    repeat(4){o+=1;
+	    repeat(planets){
+	    	o+=1;
 	        if (p_orks[o]+p_tau[o]+p_chaos[o]+p_traitors[o]+p_tyranids[o]+p_necrons[o]>mx){
 	            mx=p_orks[o]+p_tau[o]+p_chaos[o]+p_traitors[o]+p_tyranids[o]+p_necrons[o];
 	            tr=o;
@@ -17,7 +22,9 @@ function scr_enemy_ai_a() {
 	}
 
 	if (obj_controller.faction_defeated[10]>0) and (obj_controller.faction_gender[10]=2){
-	    var o;o=0;repeat(4){o+=1;
+	    var o=0;
+	    repeat(planets){
+	    	o+=1;
 	        if (array_length(p_feature[o])!=0){
 	            if (planet_feature_bool(p_feature[o], P_features.World_Eaters)==1) and (p_chaos[o]<=0){
 	                delete_features(p_feature[o],P_features.World_Eaters);
@@ -27,132 +34,85 @@ function scr_enemy_ai_a() {
 	}
 
 	// checking for inquisition dead world inspections here
-	if (present_fleet[1]>=0) and (present_fleet[4]=0){
-	    var o,yep,chanceh,stop,shitty;o=0;yep=0;stop=false;shitty=false;
+	if (present_fleet[eFACTION.Player]>=0) and (present_fleet[eFACTION.Inquisition]==0){
+	    var chapter_asset_discovery,o=0,yep=0,stop=false,shitty=false;
     
-	    chanceh=floor(random(200))+1;
-	    repeat(4){o+=1;if (obj_ini.dis[o]="Shitty Luck") then shitty=true;}
-	    if (shitty=true) then chanceh=floor(random(50))+1;
+	    chapter_asset_discovery=floor(random(200))+1;
+	    repeat(planets){
+	    	o+=1;
+	    	if (array_contains(obj_ini.dis,"Shitty Luck")) then shitty=true;}
+	    if (shitty=true) then chapter_asset_discovery=floor(random(50))+1;
     
 	    if (present_fleet[1]=0){
-	        chanceh=floor(random(2000))+1;
-	        if (shitty=true) then chanceh=floor(random(800))+1;
+	        chapter_asset_discovery=floor(random(2000))+1;
+	        if (shitty=true) then chapter_asset_discovery=floor(random(800))+1;
 	    }
     
-	    // 137 ; chanceh=floor(random(20))+1;
+	    // 137 ; chapter_asset_discovery=floor(random(20))+1;
     
 	    o=0;
-	    repeat(4){o+=1;
+	    repeat(planets){
+	    	o+=1;
 	        if (p_first[o]=1) and (p_owner[o]=2) then p_owner[o]=1;
 	        if (p_type[o]="Dead") and (array_length(p_upgrades[o])>0){
 	            if (planet_feature_bool(p_feature[o], P_features.Secret_Base)==0) /*and (string_count(".0|",p_upgrades[o])>0)*/{
-	                if (chanceh<=2) then yep=o;
+	                if (chapter_asset_discovery<=2) then yep=o;
 	            }
 	        }
 	    }
-    
+    	
+    	//if an inquis wants to check out a dead world with chapter assets
 	    if (yep>0){
-	        with(obj_temp2){instance_destroy();}
-	        with(obj_after_combat_ork_force){instance_destroy();}
-	        instance_create(x,y,obj_temp2);
+	        var planet_coords = [x,y];
 	        with(obj_en_fleet){
+	        	//checks if there is already an inquis ship investigating planet
 	            if (owner=4){
-	                var near;near=instance_nearest(action_x,action_y,obj_temp2);
-	                if (point_distance(action_x,action_y,near.x,near.y)<2) and (string_count("investigate_dead",trade_goods)>0) then instance_create(action_x,action_y,obj_after_combat_ork_force);
+	                if (point_distance(action_x,action_y,planet_coords[0],planet_coords[1])<2 && 
+	                	string_count("investigate_dead",trade_goods)>0){
+	                		stop=true;
+	            		}
 	            }
 	        }
-	        if (instance_exists(obj_after_combat_ork_force)) then stop=true;
-	        with(obj_temp2){instance_destroy();}
-	        with(obj_after_combat_ork_force){instance_destroy();}
-        
+        	
+
 	        if (stop=false){
-	            var plap,old_x,old_y,flee;plap=0;old_x=x;old_y=y;flee=0;
-	            x-=20000;y-=20000;
-            
-	            repeat(choose(2,3)){
-	                plap=instance_nearest(old_x,old_y,obj_star);
-	                with(plap){x-=20000;y-=20000;}
-	            }
-	            plap=instance_nearest(old_x,old_y,obj_star);
-	            flee=instance_create(plap.x,plap.y-24,obj_en_fleet);
-	            flee.owner=4;flee.frigate_number=1;
-	            flee.action_x=old_x;flee.action_y=old_y;
-	            flee.sprite_index=spr_fleet_inquisition;
-	            flee.image_index=0;
-            
-	            var roll;roll=floor(random(100))+1;
-	            if (roll<=60) then flee.trade_goods="Inqis1";
-	            if (roll<=70) and (roll>60) then flee.trade_goods="Inqis2";
-	            if (roll<=80) and (roll>70) then flee.trade_goods="Inqis3";
-	            if (roll<=90) and (roll>80) then flee.trade_goods="Inqis4";
-	            if (roll<=100) and (roll>90) then flee.trade_goods="Inqis5";
-	            flee.trade_goods+="|investigate_dead|";
-	            flee.alarm[4]=1;
+	            var plap=0,old_x=x,old_y=y,flee=0;
+            	var _current_planet_name = name;
+            	var launch_planet, launch_point_found=false;
+            	with (obj_star){
+            		if (name!=_current_planet_name && (owner=eFACTION.Imperium || owner=eFACTION.Mechanicus)){
+            			if (point_in_rectangle(x,y, old_x-1000, old_y-1000,old_x+1000, old_y+1000)){
+            				launch_planet=self;
+            				launch_point_found=true;
+            				break;
+            			}
+            		}
+            	}
+            	if (launch_point_found){
+		            flee=instance_create(launch_planet.x,launch_planet.y-24,obj_en_fleet);
+		            flee.owner=4;
+		            flee.frigate_number=1;
+		            flee.action_x=x;
+		            flee.action_y=y;
+		            flee.sprite_index=spr_fleet_inquisition;
+		            flee.image_index=0;
+	            
+		            var roll=floor(random(100))+1;
+		            if (roll<=60) then flee.trade_goods="Inqis1";
+		            if (roll<=70) and (roll>60) then flee.trade_goods="Inqis2";
+		            if (roll<=80) and (roll>70) then flee.trade_goods="Inqis3";
+		            if (roll<=90) and (roll>80) then flee.trade_goods="Inqis4";
+		            if (roll<=100) and (roll>90) then flee.trade_goods="Inqis5";
+		            flee.trade_goods+="|investigate_dead|";
+		            flee.alarm[4]=1;
+            	}
 	        }
 	    }
     
 	}
-
-	with(obj_star){repeat(50){if (x<-15000){x+=20000;y+=20000;}}}
-	// This is all executed by the star object
-
 
 	var run=0, stop;
 	var rand=0;
-	function garrison_force(planet_operatives)constructor{
-		garrison_squads=[];
-		total_garrison = 0;
-		garrison_force=false;
-		 for (var ops=0;ops<array_length(planet_operatives);ops++){
-	      	if(planet_operatives[ops].type=="squad"){
-	      		if (planet_operatives[ops].job == "garrison"){//marine garrison on planet
-	      			if (array_length(obj_ini.squads[planet_operatives[ops].reference].members)>0){
-		      			array_push(garrison_squads, obj_ini.squads[planet_operatives[ops].reference])
-		      			total_garrison += array_length(obj_ini.squads[planet_operatives[ops].reference].members);
-		      			garrison_force=true;
-		      		} else {
-		      			array_delete(planet_operatives, ops,1);
-		      		}
-	      		}
-	      	}		 	
-		 }
-
-		static find_leader = function(){
-			garrison_leader="none";
-			var hierarchy = role_hierarchy();
-			var leader_hier_pos=array_length(hierarchy);
-			var unit;
-			for (var squad=0;squad<array_length(garrison_squads);squad++){
-				var leader =garrison_squads[squad].determine_leader();
-				unit = obj_ini.TTRPG[leader[0]][leader[1]];
-				if (garrison_leader=="none"){
-					garrison_leader=unit;
-					for (var r=0;r<array_length(hierarchy);r++){
-						if (hierarchy[r]==unit.role()){
-							leader_hier_pos=r;
-							break;
-						}
-					}				
-				}else if (hierarchy[leader_hier_pos]==unit.role()){
-					if (garrison_leader.experience()<unit.experience()){
-						garrison_leader=unit;
-					}
-				}else{
-					for (var r=0;r<leader_hier_pos;r++){
-						if (hierarchy[r]==unit.role()){
-							leader_hier_pos=r;
-							garrison_leader=unit;
-							break;
-						}
-					}
-				}
-			}
-		};
-
-		static determine_battle = function(){
-			
-		}
-	}
     var garrison_force=false, garrisons=[], total_garrison=0;
 	for (run =1;run<5;run++){
 		garrison_force=false;
@@ -308,7 +268,7 @@ function scr_enemy_ai_a() {
 	    	var pdf_mod;
 	    	var defence_mult = p_defenses[run]*0.1;
 	    	if (pdf_with_player){//if player supports give garrison bonus
-		    	var garrison_mult = garrison.total_garrison*(0.005+(0.001*p_defenses[run]))
+		    	var garrison_mult = garrison.total_garrison*(0.008+(0.001*p_defenses[run]))
 		    	garrison.find_leader();
 		    	defence_mult+=garrison_mult
 		    	defence_mult*=(garrison.garrison_leader.wisdom)/40;//modified by how good a commander the garrison leader is
@@ -720,11 +680,12 @@ function scr_enemy_ai_a() {
 	                if (ork_score>=3) and (p_guardsmen[run]<5000) and (onc=0){p_guardsmen[run]=0;onc=1;}
 	            }
 	        }else if (ork_attack="pdf"){
-	        	var pdf_randoms = [choose(1,2,3,4,5,6), choose(1,1.25)]
-	            rand2=(pdf_randoms[0]*pdf_score)*pdf_randoms[1];
+	        	var pdf_random = choose(1,2,3,4,5,6);
+	            rand2=(pdf_random*pdf_score);
 	            if (rand1>rand2){
-	                if (ork_score<=3){p_pdf[run]=floor(p_pdf[run]*(min(0.95, 0.7+pdf_loss_reduction)));}
-	                else if (ork_score>=4) and (p_pdf[run]<=30000) {p_pdf[run]=floor(p_pdf[run]*(min(0.95, 0.55+pdf_loss_reduction)));}
+	                if (ork_score<=3 && p_pdf[run]>30000){
+	                	p_pdf[run]=floor(p_pdf[run]*(min(0.95, 0.7+pdf_loss_reduction)));
+	                }else if (ork_score>=4) and (p_pdf[run]<=30000) {p_pdf[run]=floor(p_pdf[run]*(min(0.95, 0.55+pdf_loss_reduction)));}
 	                else if (ork_score>=4) and (p_pdf[run]<30000){ p_pdf[run]=0;}
 	                else if (ork_score>=3) and (p_pdf[run]<10000){ p_pdf[run]=0;}
 	                else if (ork_score>=2) and (p_pdf[run]<2000){ p_pdf[run]=0;}
@@ -733,12 +694,13 @@ function scr_enemy_ai_a() {
 	                if (pdf_with_player && garrison.total_garrison>0){
 	                	var tixt = $"Chapter Forces led by {garrison.garrison_leader.name_role()} on {name} {scr_roman_numerals()[run-1]} were unable to secure PDF victory chapter support requested";
 	                	scr_alert("red","owner",tixt,x,y);
+	                	//garrison.determine_battle(false,rand2-rand1, eFACTION.Ork);
 	                }
 	                for (var i=0;i<array_length(garrisons);i++){
 	                	//garrisons.pdf_support_outcome(ork_score,rand2-rand1,"orks", pdf_score/defence_mult);
 	                }
 	            } else {
-	            	if (pdf_with_player && (pdf_randoms[0]*(pdf_score/defence_mult))*pdf_randoms[1]<rand1){
+	            	if (pdf_with_player && (pdf_random*(pdf_score/(1+defence_mult)))<rand1){
 	            		var tixt = $"Chapter Forces led by {garrison.garrison_leader.name_role()} on {name} {scr_roman_numerals()[run-1]} secure PDF victory";
 	            		scr_alert("green","owner",tixt,x,y);
 	            	}
