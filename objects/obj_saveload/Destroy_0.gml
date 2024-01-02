@@ -1,5 +1,5 @@
 
-scr_image("loading",-666,0,0,0,0);
+//scr_image("loading",-666,0,0,0,0);
 
 var i;i=-1;
 /*repeat(201){i+=1;

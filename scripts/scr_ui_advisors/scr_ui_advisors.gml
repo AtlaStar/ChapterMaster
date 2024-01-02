@@ -58,8 +58,9 @@ function scr_ui_advisors() {
         draw_rectangle(xx + 945, yy + 66, xx + 1580, yy + 818, 1);
 
         if (menu_adept = 0) {
-            scr_image("advisor", 6, xx + 16, yy + 43, 310, 828);
-            // draw_sprite(spr_advisors,6,xx+16,yy+43);
+			draw_sprite(obj_img.images.diplomacy.advisor7, 0, xx + 16, yy + 43)
+            //scr_image("advisor", 6, xx + 16, yy + 43, 310, 828);
+            //draw_sprite(spr_advisors,6,xx+16,yy+43);
             draw_set_halign(fa_left);
             draw_set_color(c_gray);
             draw_set_font(fnt_40k_30b);
@@ -69,7 +70,8 @@ function scr_ui_advisors() {
             blurp = "Greetings, Chapter Master.##You requested a report?  Our fleet contains ";
         }
         if (menu_adept = 1) {
-            scr_image("advisor", 0, xx + 16, yy + 43, 310, 828);
+			draw_sprite(obj_img.images.diplomacy.advisor1, 0, xx + 16, yy + 43)
+            //scr_image("advisor", 0, xx + 16, yy + 43, 310, 828);
             // draw_sprite(spr_advisors,0,xx+16,yy+43);
             draw_set_halign(fa_left);
             draw_set_color(c_gray);
@@ -221,9 +223,11 @@ function scr_ui_advisors() {
         draw_rectangle(xx + 945, yy + 66, xx + 1580, yy + 818, 1);
 
         if (menu_adept = 0) {
-            scr_image("advisor", 1, xx + 16, yy + 43, 310, 828);
+			draw_sprite(obj_img.images.diplomacy.advisor1, 0, xx + 16, yy + 43)
+            //scr_image("advisor", 1, xx + 16, yy + 43, 310, 828);
             // draw_sprite(spr_advisors,1,xx+16,yy+43);
-            if (global.chapter_name = "Space Wolves") then scr_image("advisor", 11, xx + 16, yy + 43, 310, 828);
+            if (global.chapter_name = "Space Wolves")
+				draw_sprite(obj_img.images.diplomacy.advisor11, 0, xx + 16, yy + 43)
             // draw_sprite(spr_advisors,11,xx+16,yy+43);
             draw_set_halign(fa_left);
             draw_set_color(c_gray);

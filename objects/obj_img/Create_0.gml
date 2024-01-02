@@ -56,6 +56,52 @@ slate_good=false;
 // End Image Replacer
 // Start Text Replacer
 
+
+img_dir = working_directory + "images/"
+images = {};
+
+var fhandle = file_find_first(img_dir+"*", fa_directory)
+var dirs = []
+
+while(fhandle != "" ) {
+	if directory_exists(img_dir + fhandle) {
+		array_push(dirs,fhandle)
+	}
+	fhandle = file_find_next();
+}
+file_find_close()
+
+array_foreach(dirs, function(elem) {
+	images[$ elem] ??= {}
+	
+	var filter = img_dir + elem + "/*.png";
+	var fhandle = file_find_first(filter, fa_none)
+	while(fhandle != "") {
+		var path = img_dir + filename_path(elem + "/" + fhandle);
+		var png = filename_name(fhandle) 
+		var name = string_replace(png, filename_ext(fhandle), "");
+		if file_exists(name + ".json") {
+			var fjson = file_text_open_read(img_dir + elem + "/" + name + ".json")
+			var json = json_parse(file_text_read_string(fjson))
+			var source = json.path ?? path;
+			images[$ elem][$ name] = sprite_add(source + png, json.frames, json.removeback, json.smooth, json.xorig, json.yorig)
+		} else {
+			images[$ elem][$ name]= sprite_add_ext(path + png, 1, 0, 0, false)
+		}
+		
+		fhandle = file_find_next();
+	}
+	file_find_close()
+})
+
+show_debug_message(images)
+
+scr_image("creation",-50,0,0,0,0);
+scr_image("main_splash",-50,0,0,0,0);
+scr_image("existing_splash",-50,0,0,0,0);
+scr_image("other_splash",-50,0,0,0,0);
+
+scr_image("loading",-50,0,0,0,0);
 scr_image("title_splash",-50,0,0,0,0)
 scr_image("force",-50,0,0,0,0)
 scr_image("diplomacy_icon",-50,0,0,0,0);

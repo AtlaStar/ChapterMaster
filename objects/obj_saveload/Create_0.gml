@@ -1,5 +1,5 @@
 
-scr_image("loading",-50,0,0,0,0);
+//scr_image("loading",-50,0,0,0,0);
 
 menu=0;// 1 : save, 2: load
 save_part=0;

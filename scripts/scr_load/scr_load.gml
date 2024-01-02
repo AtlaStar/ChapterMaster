@@ -403,6 +403,7 @@ function scr_load(argument0, argument1) {
 	    var i;i=-1;
 		var new_star;
 	    repeat(stars) { i+=1;
+			
 			var xx=ini_read_real("Star","sr"+string(i)+"x",0);
 	        var yy=ini_read_real("Star","sr"+string(i)+"y",0);
 			new_star=instance_create(xx,yy,obj_star);
